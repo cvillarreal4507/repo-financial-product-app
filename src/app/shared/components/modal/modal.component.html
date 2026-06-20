@@ -1,0 +1,17 @@
+<div class="modal-overlay" *ngIf="isOpen" (click)="onCancel()">
+  <div class="modal-card animate-scale-in" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">{{ title }}</h3>
+      <button class="close-btn" (click)="onCancel()">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <ng-content></ng-content>
+    </div>
+
+    <div class="modal-footer">
+      <app-button variant="outline" (btnClick)="onCancel()">Cancel</app-button>
+      <app-button variant="danger" (btnClick)="onConfirm()">Confirm</app-button>
+    </div>
+  </div>
+</div>
