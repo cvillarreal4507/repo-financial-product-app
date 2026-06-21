@@ -22,7 +22,7 @@ export class FormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -30,19 +30,19 @@ export class FormComponent implements OnInit {
       this.isEditMode = true;
       this.productId = id;
     }
-    
+
     this.initForm();
-    
+
     if (this.isEditMode) {
       this.loadProductDetails();
     }
-    
+
     this.setupDateCalculation();
   }
 
   private initForm(): void {
     const todayStr = this.getTodayString();
-    
+
     this.form = this.fb.group({
       id: [
         { value: '', disabled: this.isEditMode },
@@ -121,7 +121,7 @@ export class FormComponent implements OnInit {
 
   private dateReleaseValidator(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null;
-    
+
     const inputDate = new Date(control.value + 'T00:00:00');
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -154,7 +154,7 @@ export class FormComponent implements OnInit {
     }
 
     this.isSaving = true;
-    
+
     const rawValues = this.form.getRawValue();
     const productData: Product = {
       id: rawValues.id,

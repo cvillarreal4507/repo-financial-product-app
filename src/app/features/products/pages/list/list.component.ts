@@ -47,6 +47,8 @@ export class ListComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching products:', err);
+        this.products = [];
+        this.filteredProducts = [];
         this.isLoading = false;
       }
     });
