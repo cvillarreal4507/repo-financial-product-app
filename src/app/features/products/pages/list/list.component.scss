@@ -318,3 +318,90 @@
   color: var(--text-secondary);
   line-height: 1.6;
 }
+
+.table-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px;
+  border-top: 1px solid var(--border-color);
+  background-color: #f8fafc;
+  align-items: center;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.records-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+
+  strong {
+    color: var(--text-primary);
+  }
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 4px;
+}
+
+.pag-btn {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    border-color: var(--primary-light);
+    color: var(--primary-color);
+    background-color: rgba(15, 38, 92, 0.02);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: #f1f5f9;
+    color: var(--text-light);
+  }
+
+  &.page-num {
+    min-width: 34px;
+    height: 34px;
+    padding: 0;
+
+    &.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: #ffffff;
+
+      &:hover {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #ffffff;
+      }
+    }
+  }
+
+  &.prev-btn,
+  &.next-btn {
+    height: 34px;
+  }
+}

@@ -6,7 +6,7 @@
     </div>
     <app-button variant="primary" (btnClick)="onAddProduct()">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
       </svg>
       Add Product
     </app-button>
@@ -14,16 +14,13 @@
 
   <div class="filters-section premium-card glassmorphism">
     <div class="search-box">
-      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+        fill="currentColor">
+        <path
+          d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
       </svg>
-      <input
-        type="text"
-        placeholder="Search products..."
-        [value]="searchTerm"
-        (input)="onSearch($event)"
-        class="search-input"
-      />
+      <input type="text" placeholder="Search products..." [value]="searchTerm" (input)="onSearch($event)"
+        class="search-input" />
     </div>
 
     <div class="pagination-limit">
@@ -67,10 +64,12 @@
   </div>
 
   <!-- Empty State -->
-  <div class="empty-state premium-card glassmorphism animate-fade-in" *ngIf="!isLoading && filteredProducts.length === 0">
+  <div class="empty-state premium-card glassmorphism animate-fade-in"
+    *ngIf="!isLoading && filteredProducts.length === 0">
     <div class="empty-icon-wrapper">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
-        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2zm0 8H7v-2h10v2z"/>
+        <path
+          d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2zm0 8H7v-2h10v2z" />
       </svg>
     </div>
     <h3 class="empty-title">No products found</h3>
@@ -95,7 +94,8 @@
             <th (click)="toggleSort('description')" class="sortable-th" [class.active-sort]="sortBy === 'description'">
               <div class="th-content">
                 Description
-                <span class="sort-arrow" *ngIf="sortBy === 'description'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+                <span class="sort-arrow" *ngIf="sortBy === 'description'">{{ sortDirection === 'asc' ? '▲' : '▼'
+                  }}</span>
                 <span class="sort-arrow-placeholder" *ngIf="sortBy !== 'description'">⇅</span>
               </div>
             </th>
@@ -106,17 +106,21 @@
                 <span class="sort-arrow-placeholder" *ngIf="sortBy !== 'id'">⇅</span>
               </div>
             </th>
-            <th (click)="toggleSort('date_release')" class="sortable-th" [class.active-sort]="sortBy === 'date_release'">
+            <th (click)="toggleSort('date_release')" class="sortable-th"
+              [class.active-sort]="sortBy === 'date_release'">
               <div class="th-content">
                 Release Date
-                <span class="sort-arrow" *ngIf="sortBy === 'date_release'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+                <span class="sort-arrow" *ngIf="sortBy === 'date_release'">{{ sortDirection === 'asc' ? '▲' : '▼'
+                  }}</span>
                 <span class="sort-arrow-placeholder" *ngIf="sortBy !== 'date_release'">⇅</span>
               </div>
             </th>
-            <th (click)="toggleSort('date_revision')" class="sortable-th" [class.active-sort]="sortBy === 'date_revision'">
+            <th (click)="toggleSort('date_revision')" class="sortable-th"
+              [class.active-sort]="sortBy === 'date_revision'">
               <div class="th-content">
                 Revision Date
-                <span class="sort-arrow" *ngIf="sortBy === 'date_revision'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span>
+                <span class="sort-arrow" *ngIf="sortBy === 'date_revision'">{{ sortDirection === 'asc' ? '▲' : '▼'
+                  }}</span>
                 <span class="sort-arrow-placeholder" *ngIf="sortBy !== 'date_revision'">⇅</span>
               </div>
             </th>
@@ -124,14 +128,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let prod of filteredProducts | slice:0:pageSize; trackBy: trackByProductId; let last = last" class="table-row">
+          <tr
+            *ngFor="let prod of filteredProducts | slice:(currentPage - 1) * pageSize : currentPage * pageSize; trackBy: trackByProductId; let last = last"
+            class="table-row">
             <td class="logo-td">
               <div class="logo-wrapper">
-                <img
-                  [src]="prod.logo"
-                  [alt]="prod.name"
-                  class="product-logo"
-                />
+                <img [src]="prod.logo" [alt]="prod.name" class="product-logo" />
               </div>
             </td>
             <td class="name-td">{{ prod.name }}</td>
@@ -140,27 +142,44 @@
             <td class="date-td">{{ prod.date_release | date:'dd/MM/yyyy':'UTC' }}</td>
             <td class="date-td">{{ prod.date_revision | date:'dd/MM/yyyy':'UTC' }}</td>
             <td class="actions-td">
-              <app-context-menu
-                [placement]="last ? 'top' : 'bottom'"
-                (edit)="onEditProduct(prod)"
-                (delete)="openDeleteModal(prod)"
-              ></app-context-menu>
+              <app-context-menu [placement]="last ? 'top' : 'bottom'" (edit)="onEditProduct(prod)"
+                (delete)="openDeleteModal(prod)"></app-context-menu>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <div class="table-footer">
+      <div class="records-info">
+        Showing <strong>{{ startIndex }}</strong> to <strong>{{ endIndex }}</strong> of <strong>{{
+          filteredProducts.length }}</strong> products
+      </div>
+
+      <div class="pagination-controls" *ngIf="totalPages > 1">
+        <button class="pag-btn prev-btn" [disabled]="currentPage === 1" (click)="prevPage()">
+          &lt; Prev
+        </button>
+
+        <div class="page-numbers">
+          <button *ngFor="let page of pagesArray" class="pag-btn page-num" [class.active]="currentPage === page"
+            (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </div>
+
+        <button class="pag-btn next-btn" [disabled]="currentPage === totalPages" (click)="nextPage()">
+          Next &gt;
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- Delete Confirmation Modal -->
-<app-modal
-  [isOpen]="isModalOpen"
-  [title]="'Delete Product'"
-  (confirm)="confirmDelete()"
-  (cancel)="closeDeleteModal()"
->
+<app-modal [isOpen]="isModalOpen" [title]="'Delete Product'" (confirm)="confirmDelete()" (cancel)="closeDeleteModal()">
   <div class="delete-confirmation-msg" *ngIf="productToDelete">
-    Are you sure you want to delete the product <strong>{{ productToDelete.name }}</strong>? This action cannot be undone.
+    Are you sure you want to delete the product <strong>{{ productToDelete.name }}</strong>? This action cannot be
+    undone.
   </div>
 </app-modal>

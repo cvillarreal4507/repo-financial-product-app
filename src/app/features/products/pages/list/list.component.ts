@@ -16,6 +16,9 @@ export class ListComponent implements OnInit {
   pageSize = 5;
   pageSizeOptions = [5, 10, 20];
   
+  // Pagination state
+  currentPage = 1;
+
   // Sorting state
   sortBy: keyof Product = 'name';
   sortDirection: 'asc' | 'desc' = 'asc';
@@ -81,6 +84,7 @@ export class ListComponent implements OnInit {
       return 0;
     });
 
+    this.currentPage = 1;
     this.filteredProducts = tempProducts;
   }
 
@@ -102,6 +106,7 @@ export class ListComponent implements OnInit {
   onPageSizeChange(event: Event): void {
     const size = (event.target as HTMLSelectElement).value;
     this.pageSize = parseInt(size, 10);
+    this.currentPage = 1;
   }
 
   onAddProduct(): void {
@@ -142,5 +147,45 @@ export class ListComponent implements OnInit {
 
   trackByProductId(index: number, product: Product): string {
     return product.id;
+  }
+
+  // Pagination Getters & Methods
+  get totalPages(): number {
+    return Math.ceil(this.filteredProducts.length / this.pageSize);
+  }
+
+  get startIndex(): number {
+    return this.filteredProducts.length === 0 ? 0 : (this.currentPage - 1) * this.pageSize + 1;
+  }
+
+  get endIndex(): number {
+    const end = this.currentPage * this.pageSize;
+    return end > this.filteredProducts.length ? this.filteredProducts.length : end;
+  }
+
+  get pagesArray(): number[] {
+    const pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
   }
 }
