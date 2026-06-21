@@ -3,7 +3,7 @@
     <ng-content select="[trigger]"></ng-content>
   </div>
   
-  <div *ngIf="isOpen" [class]="'dropdown-menu align-' + align + ' animate-fade-in-down'">
+  <div *ngIf="isOpen" [class]="'dropdown-menu align-' + align + ' placement-' + placement + ' ' + (placement === 'top' ? 'animate-fade-in-up' : 'animate-fade-in-down')">
     <div (click)="close()">
       <ng-content select="[menu]"></ng-content>
     </div>

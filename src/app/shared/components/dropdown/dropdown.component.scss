@@ -10,8 +10,6 @@
 
 .dropdown-menu {
   position: absolute;
-  top: 100%;
-  margin-top: 6px;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -19,6 +17,16 @@
   min-width: 140px;
   z-index: 50;
   overflow: hidden;
+
+  &.placement-bottom {
+    top: 100%;
+    margin-top: 6px;
+  }
+
+  &.placement-top {
+    bottom: 100%;
+    margin-bottom: 6px;
+  }
 
   &.align-right {
     right: 0;
@@ -41,6 +49,21 @@
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-fade-in-down {
   animation: fadeInDown var(--transition-fast) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--transition-fast) forwards;
 }

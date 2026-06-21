@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-context-menu',
@@ -6,6 +6,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./context-menu.component.scss']
 })
 export class ContextMenuComponent {
+  @Input() placement: 'top' | 'bottom' = 'bottom';
   @Output() edit = new EventEmitter<void>();
   @Output() delete = new EventEmitter<void>();
 

@@ -7,6 +7,7 @@ import { Component, ElementRef, HostListener, Input } from '@angular/core';
 })
 export class DropdownComponent {
   @Input() align: 'left' | 'right' = 'right';
+  @Input() placement: 'top' | 'bottom' = 'bottom';
   isOpen = false;
 
   constructor(private elementRef: ElementRef) {}

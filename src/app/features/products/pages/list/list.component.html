@@ -124,7 +124,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let prod of filteredProducts | slice:0:pageSize; trackBy: trackByProductId" class="table-row">
+          <tr *ngFor="let prod of filteredProducts | slice:0:pageSize; trackBy: trackByProductId; let last = last" class="table-row">
             <td class="logo-td">
               <div class="logo-wrapper">
                 <img
@@ -141,6 +141,7 @@
             <td class="date-td">{{ prod.date_revision | date:'dd/MM/yyyy':'UTC' }}</td>
             <td class="actions-td">
               <app-context-menu
+                [placement]="last ? 'top' : 'bottom'"
                 (edit)="onEditProduct(prod)"
                 (delete)="openDeleteModal(prod)"
               ></app-context-menu>
