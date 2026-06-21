@@ -8,6 +8,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ListComponent } from './list.component';
 import { ProductService } from '../../services/product.service';
 import { Product } from 'src/app/core/models/product.model';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -53,7 +54,7 @@ describe('ListComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule],
+      imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
       declarations: [ListComponent],
       providers: [
         { provide: ProductService, useValue: mockProductService },

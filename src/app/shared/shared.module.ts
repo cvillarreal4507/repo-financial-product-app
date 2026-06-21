@@ -7,6 +7,7 @@ import { InputComponent } from './components/input/input.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
+import { TranslatePipe } from './pipes/translate.pipe';
 
 const COMPONENTS = [
   ButtonComponent,
@@ -18,7 +19,8 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    TranslatePipe
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ const COMPONENTS = [
   exports: [
     CommonModule,
     ReactiveFormsModule,
-    ...COMPONENTS
+    ...COMPONENTS,
+    TranslatePipe
   ]
 })
 export class SharedModule { }

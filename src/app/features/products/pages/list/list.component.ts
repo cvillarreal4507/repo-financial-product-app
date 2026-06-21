@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
   searchTerm = '';
   pageSize = 5;
   pageSizeOptions = [5, 10, 20];
-  
+
   // Pagination state
   currentPage = 1;
 
@@ -31,7 +31,7 @@ export class ListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -57,7 +57,7 @@ export class ListComponent implements OnInit {
   applyFilter(): void {
     const term = this.searchTerm.toLowerCase().trim();
     let tempProducts = [...this.products];
-    
+
     if (term) {
       tempProducts = this.products.filter(
         (p) =>
@@ -80,7 +80,7 @@ export class ListComponent implements OnInit {
 
       const strA = (valA || '').toString().toLowerCase();
       const strB = (valB || '').toString().toLowerCase();
-      
+
       if (strA < strB) return this.sortDirection === 'asc' ? -1 : 1;
       if (strA > strB) return this.sortDirection === 'asc' ? 1 : -1;
       return 0;
@@ -131,7 +131,7 @@ export class ListComponent implements OnInit {
 
   confirmDelete(): void {
     if (!this.productToDelete) return;
-    
+
     this.isDeleting = true;
     this.productService.deleteProduct(this.productToDelete.id).subscribe({
       next: () => {

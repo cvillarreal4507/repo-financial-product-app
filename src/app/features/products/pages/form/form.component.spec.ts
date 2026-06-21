@@ -10,6 +10,7 @@ import { FormComponent } from './form.component';
 import { ProductService } from '../../services/product.service';
 import { Product } from 'src/app/core/models/product.model';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslationService } from 'src/app/core/services/translation.service';
 
 describe('FormComponent', () => {
   let component: FormComponent;
@@ -17,6 +18,7 @@ describe('FormComponent', () => {
   let mockProductService: jest.Mocked<any>;
   let mockRouter: any;
   let mockActivatedRoute: any;
+  let translationService: TranslationService;
 
   const mockProduct: Product = {
     id: 'prod-123',
@@ -64,6 +66,8 @@ describe('FormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
+    translationService = TestBed.inject(TranslationService);
+    translationService.setLanguage('en');
   });
 
   it('should create in add mode by default', () => {
@@ -72,6 +76,14 @@ describe('FormComponent', () => {
     expect(component.isEditMode).toBe(false);
     expect(component.form.get('id')?.disabled).toBe(false);
   });
+
+  it('should focus the ID input field on init in add mode', fakeAsync(() => {
+    fixture.detectChanges();
+    const focusSpy = jest.spyOn(component.idInput, 'focus');
+    component.ngAfterViewInit();
+    tick();
+    expect(focusSpy).toHaveBeenCalled();
+  }));
 
   it('should create in edit mode and load product details', () => {
     mockActivatedRoute.snapshot.paramMap.get.mockReturnValue('prod-123');

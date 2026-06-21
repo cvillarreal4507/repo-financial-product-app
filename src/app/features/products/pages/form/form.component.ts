@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, catchError, of, Observable } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { Product } from 'src/app/core/models/product.model';
+import { TranslationService } from 'src/app/core/services/translation.service';
+import { InputComponent } from '../../../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, AfterViewInit {
+  @ViewChild('idInput') idInput!: InputComponent;
   form!: FormGroup;
   isEditMode = false;
   productId = '';
@@ -21,7 +24,8 @@ export class FormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private translationService: TranslationService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +42,14 @@ export class FormComponent implements OnInit {
     }
 
     this.setupDateCalculation();
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.isEditMode && this.idInput) {
+      setTimeout(() => {
+        this.idInput.focus();
+      }, 100);
+    }
   }
 
   private initForm(): void {
@@ -208,39 +220,39 @@ export class FormComponent implements OnInit {
 
   getIdErrorMessage(): string {
     const control = this.form.get('id');
-    if (control?.hasError('required')) return 'This field is required.';
-    if (control?.hasError('minlength')) return 'Minimum 3 characters.';
-    if (control?.hasError('maxlength')) return 'Maximum 10 characters.';
-    if (control?.hasError('idExists')) return 'This ID is already registered.';
+    if (control?.hasError('required')) return this.translationService.instant('VAL_REQUIRED');
+    if (control?.hasError('minlength')) return this.translationService.instant('VAL_MINLENGTH_ID');
+    if (control?.hasError('maxlength')) return this.translationService.instant('VAL_MAXLENGTH_ID');
+    if (control?.hasError('idExists')) return this.translationService.instant('VAL_ID_EXISTS');
     return '';
   }
 
   getNameErrorMessage(): string {
     const control = this.form.get('name');
-    if (control?.hasError('required')) return 'This field is required.';
-    if (control?.hasError('minlength')) return 'Minimum 6 characters.';
-    if (control?.hasError('maxlength')) return 'Maximum 100 characters.';
+    if (control?.hasError('required')) return this.translationService.instant('VAL_REQUIRED');
+    if (control?.hasError('minlength')) return this.translationService.instant('VAL_MINLENGTH_NAME');
+    if (control?.hasError('maxlength')) return this.translationService.instant('VAL_MAXLENGTH_NAME');
     return '';
   }
 
   getDescriptionErrorMessage(): string {
     const control = this.form.get('description');
-    if (control?.hasError('required')) return 'This field is required.';
-    if (control?.hasError('minlength')) return 'Minimum 10 characters.';
-    if (control?.hasError('maxlength')) return 'Maximum 200 characters.';
+    if (control?.hasError('required')) return this.translationService.instant('VAL_REQUIRED');
+    if (control?.hasError('minlength')) return this.translationService.instant('VAL_MINLENGTH_DESC');
+    if (control?.hasError('maxlength')) return this.translationService.instant('VAL_MAXLENGTH_DESC');
     return '';
   }
 
   getLogoErrorMessage(): string {
     const control = this.form.get('logo');
-    if (control?.hasError('required')) return 'This field is required.';
+    if (control?.hasError('required')) return this.translationService.instant('VAL_REQUIRED');
     return '';
   }
 
   getReleaseDateErrorMessage(): string {
     const control = this.form.get('date_release');
-    if (control?.hasError('required')) return 'This field is required.';
-    if (control?.hasError('invalidReleaseDate')) return 'The date must be today or later.';
+    if (control?.hasError('required')) return this.translationService.instant('VAL_REQUIRED');
+    if (control?.hasError('invalidReleaseDate')) return this.translationService.instant('VAL_INVALID_RELEASE_DATE');
     return '';
   }
 }

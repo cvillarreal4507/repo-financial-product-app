@@ -1,35 +1,6 @@
 .list-container {
-  padding-top: 20px;
+  padding-top: 24px;
   padding-bottom: 64px;
-}
-
-.page-header {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  app-button {
-    width: auto;
-  }
-}
-
-.header-title-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.page-title {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--primary-color);
 }
 
 .filters-section {

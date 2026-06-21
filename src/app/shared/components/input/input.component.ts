@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef, ViewChild, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class InputComponent implements ControlValueAccessor {
+  @ViewChild('inputEl', { static: false }) inputEl!: ElementRef<HTMLInputElement>;
   @Input() label = '';
   @Input() placeholder = '';
   @Input() type = 'text';
@@ -53,5 +54,11 @@ export class InputComponent implements ControlValueAccessor {
 
   onBlur(): void {
     this.onTouch();
+  }
+
+  focus(): void {
+    if (this.inputEl) {
+      this.inputEl.nativeElement.focus();
+    }
   }
 }

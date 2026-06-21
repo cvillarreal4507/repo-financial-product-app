@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ContextMenuComponent } from './context-menu.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('ContextMenuComponent', () => {
   let component: ContextMenuComponent;
@@ -8,8 +8,8 @@ describe('ContextMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContextMenuComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ]
+      imports: [ SharedModule ],
+      declarations: [ ContextMenuComponent ]
     })
     .compileComponents();
   });
