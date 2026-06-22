@@ -6,13 +6,14 @@ import { ProductService } from '../../services/product.service';
 import { Product } from 'src/app/core/models/product.model';
 import { TranslationService } from 'src/app/core/services/translation.service';
 import { InputComponent } from '../../../../shared/components/input/input.component';
+import { CanComponentDeactivate } from '../../../../core/guards/unsaved-changes.guard';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit, AfterViewInit {
+export class FormComponent implements OnInit, AfterViewInit, CanComponentDeactivate {
   @ViewChild('idInput') idInput!: InputComponent;
   form!: FormGroup;
   isEditMode = false;
@@ -46,9 +47,7 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (!this.isEditMode && this.idInput) {
-      setTimeout(() => {
-        this.idInput.focus();
-      }, 100);
+      this.idInput.focus();
     }
   }
 
@@ -254,5 +253,12 @@ export class FormComponent implements OnInit, AfterViewInit {
     if (control?.hasError('required')) return this.translationService.instant('VAL_REQUIRED');
     if (control?.hasError('invalidReleaseDate')) return this.translationService.instant('VAL_INVALID_RELEASE_DATE');
     return '';
+  }
+
+  canDeactivate(): boolean {
+    if (this.form && this.form.dirty && !this.isSaving) {
+      return confirm(this.translationService.instant('CONFIRM_LEAVE_UNSAVED'));
+    }
+    return true;
   }
 }

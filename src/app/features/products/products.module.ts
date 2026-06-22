@@ -7,6 +7,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ListComponent } from './pages/list/list.component';
 import { FormComponent } from './pages/form/form.component';
 import { ContextMenuComponent } from './components/context-menu/context-menu.component';
+import { ProductExistsGuard } from '../../core/guards/product-exists.guard';
+import { UnsavedChangesGuard } from '../../core/guards/unsaved-changes.guard';
 
 const routes: Routes = [
   {
@@ -15,11 +17,14 @@ const routes: Routes = [
   },
   {
     path: 'add',
-    component: FormComponent
+    component: FormComponent,
+    canDeactivate: [UnsavedChangesGuard]
   },
   {
     path: 'edit/:id',
-    component: FormComponent
+    component: FormComponent,
+    canActivate: [ProductExistsGuard],
+    canDeactivate: [UnsavedChangesGuard]
   }
 ];
 

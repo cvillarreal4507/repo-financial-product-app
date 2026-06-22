@@ -20,13 +20,19 @@ describe('FormComponent', () => {
   let mockActivatedRoute: any;
   let translationService: TranslationService;
 
+  const getTodayPlusDays = (days: number) => {
+    const d = new Date();
+    d.setDate(d.getDate() + days);
+    return d.toISOString();
+  };
+
   const mockProduct: Product = {
     id: 'prod-123',
     name: 'Standard Card Product',
     description: 'Product description is valid and longer than 10 characters',
     logo: 'logo.png',
-    date_release: '2026-06-20T00:00:00.000Z',
-    date_revision: '2027-06-20T00:00:00.000Z'
+    date_release: getTodayPlusDays(1),
+    date_revision: getTodayPlusDays(366)
   };
 
   beforeEach(async () => {
@@ -77,13 +83,12 @@ describe('FormComponent', () => {
     expect(component.form.get('id')?.disabled).toBe(false);
   });
 
-  it('should focus the ID input field on init in add mode', fakeAsync(() => {
+  it('should focus the ID input field on init in add mode', () => {
     fixture.detectChanges();
     const focusSpy = jest.spyOn(component.idInput, 'focus');
     component.ngAfterViewInit();
-    tick();
     expect(focusSpy).toHaveBeenCalled();
-  }));
+  });
 
   it('should create in edit mode and load product details', () => {
     mockActivatedRoute.snapshot.paramMap.get.mockReturnValue('prod-123');
@@ -176,7 +181,7 @@ describe('FormComponent', () => {
     component.form.get('name')?.setValue('Product Name Valid');
     component.form.get('description')?.setValue('Product description description description');
     component.form.get('logo')?.setValue('http://logo.png');
-    component.form.get('date_release')?.setValue('2026-06-20');
+    component.form.get('date_release')?.setValue(getTodayPlusDays(1).split('T')[0]);
     
     expect(component.form.valid).toBe(true);
     component.onSubmit();
@@ -209,7 +214,7 @@ describe('FormComponent', () => {
     component.form.get('name')?.setValue('Product Name Valid');
     component.form.get('description')?.setValue('Product description description description');
     component.form.get('logo')?.setValue('http://logo.png');
-    component.form.get('date_release')?.setValue('2026-06-20');
+    component.form.get('date_release')?.setValue(getTodayPlusDays(1).split('T')[0]);
 
     component.onSubmit();
     expect(component.isSaving).toBe(false);
@@ -237,6 +242,39 @@ describe('FormComponent', () => {
   it('should navigate back onBack()', () => {
     component.onBack();
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/products']);
+  });
+
+  describe('canDeactivate', () => {
+    it('should return true if form is pristine', () => {
+      fixture.detectChanges();
+      expect(component.canDeactivate()).toBe(true);
+    });
+
+    it('should return true if form is dirty but saving is in progress', () => {
+      fixture.detectChanges();
+      component.form.markAsDirty();
+      component.isSaving = true;
+      expect(component.canDeactivate()).toBe(true);
+    });
+
+    it('should prompt user via confirm dialog if form is dirty and not saving', () => {
+      fixture.detectChanges();
+      component.form.markAsDirty();
+      component.isSaving = false;
+
+      const confirmSpy = jest.spyOn(window, 'confirm');
+
+      // User cancels the navigation
+      confirmSpy.mockReturnValue(false);
+      expect(component.canDeactivate()).toBe(false);
+      expect(confirmSpy).toHaveBeenCalled();
+
+      // User confirms the navigation
+      confirmSpy.mockReturnValue(true);
+      expect(component.canDeactivate()).toBe(true);
+
+      confirmSpy.mockRestore();
+    });
   });
 
   it('should generate template error message strings', () => {

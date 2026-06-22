@@ -79,6 +79,7 @@ export const en = {
   'VAL_MINLENGTH_DESC': 'Minimum 10 characters.',
   'VAL_MAXLENGTH_DESC': 'Maximum 200 characters.',
   'VAL_INVALID_RELEASE_DATE': 'The date must be today or later.',
+  'CONFIRM_LEAVE_UNSAVED': 'You have unsaved changes. Are you sure you want to leave?'
 };
 
 export const es = {
@@ -159,6 +160,7 @@ export const es = {
   'VAL_MINLENGTH_DESC': 'Mínimo 10 caracteres.',
   'VAL_MAXLENGTH_DESC': 'Máximo 200 caracteres.',
   'VAL_INVALID_RELEASE_DATE': 'La fecha debe ser hoy o posterior.',
+  'CONFIRM_LEAVE_UNSAVED': 'Tienes cambios sin guardar. ¿Estás seguro de que deseas salir?'
 };
 
 export type Lang = 'en' | 'es';
