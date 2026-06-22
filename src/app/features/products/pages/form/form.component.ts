@@ -179,6 +179,7 @@ export class FormComponent implements OnInit, AfterViewInit, CanComponentDeactiv
     if (this.isEditMode) {
       this.productService.updateProduct(this.productId, productData).subscribe({
         next: () => {
+          this.form.markAsPristine();
           this.isSaving = false;
           this.router.navigate(['/products']);
         },
@@ -190,6 +191,7 @@ export class FormComponent implements OnInit, AfterViewInit, CanComponentDeactiv
     } else {
       this.productService.createProduct(productData).subscribe({
         next: () => {
+          this.form.markAsPristine();
           this.isSaving = false;
           this.router.navigate(['/products']);
         },
