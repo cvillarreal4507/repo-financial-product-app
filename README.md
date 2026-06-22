@@ -1,27 +1,63 @@
-# RepoFinancialProductApp
+# Financial Product App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+Esta aplicacion es una solucion basada en Angular para gestionar productos financieros (como tarjetas de credito, cuentas de ahorro, etc.) de manera dinamica. Permite buscar, paginar, ordenar, registrar, editar y eliminar productos financieros. Tambien cuenta con un sistema de traduccion dinamico en tiempo real para Español e Ingles.
 
-## Development server
+## Arquitectura del Proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+El proyecto sigue una estructura limpia y escalable organizada por modulos:
 
-## Code scaffolding
+- **Core (core/)**: Contiene los servicios globales de la aplicacion que deben tener una sola instancia en el ciclo de vida, como el servicio de traduccion (`TranslationService`) y los modelos de datos compartidos.
+- **Shared (shared/)**: Contiene componentes de interfaz reutilizables e independientes del contexto de negocio (`app-button`, `app-input`, `app-dropdown`, `app-modal`, `app-skeleton`), directivas, y la tuberia personalizada `TranslatePipe`.
+- **Features (features/)**: Agrupa los modulos de negocio de la aplicacion. En este caso, el modulo `products` gestiona las vistas de listado (`list`) y formulario de registro/edicion (`form`), sus servicios especificos (`ProductService`), y componentes locales (`ContextMenuComponent`).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tecnologias y Versiones
 
-## Build
+Las tecnologias principales y dependencias utilizadas en el desarrollo de la aplicacion son:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Angular**: version 14.2.0
+- **Angular CLI**: version 14.2.13
+- **RxJS**: version 7.5.0
+- **TypeScript**: version 4.7.2
+- **Jest**: version 28.1.3 (utilizado como framework de pruebas unitarias en sustitucion de Karma/Jasmine)
+- **CSS / SCSS**: Estilos nativos y estructurados con variables globales para soportar un diseño premium
 
-## Running unit tests
+## Configuracion del Proxy y CORS
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para conectar la aplicacion frontend con los servicios del backend se ha configurado un proxy de desarrollo en el archivo `proxy.conf.json`.
 
-## Running end-to-end tests
+Dado que las peticiones directas al backend estaban siendo bloqueadas debido a politicas de CORS (Cross-Origin Resource Sharing), se opto por adaptar la configuracion de la aplicacion cliente en lugar de modificar el backend. El servidor de desarrollo de Angular redirige las solicitudes realizadas bajo la ruta `/bp` hacia el servidor backend local (`http://localhost:3002`), eludiendo las restricciones de CORS en el entorno local.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Instalacion y Ejecucion
 
-## Further help
+Siga estos pasos para instalar y ejecutar el proyecto localmente:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Requisitos Previos
+
+Asegurese de tener instalado Node.js (se recomiendan versiones 16 o 18 LTS) y npm en su sistema.
+
+### 1. Instalar las dependencias
+
+Ejecute el siguiente comando en la raiz del proyecto para descargar e instalar todas las dependencias necesarias:
+
+```bash
+npm install
+```
+
+### 2. Levantar el servidor de desarrollo
+
+Inicie el servidor local ejecutando:
+
+```bash
+npm start
+```
+
+Este comando compila la aplicacion y levanta un servidor de desarrollo. Ademas, carga de forma automatica la configuracion de proxy definida.
+Abra su navegador en la direccion `http://localhost:4200/` para ver la aplicacion.
+
+### 3. Ejecutar las pruebas unitarias
+
+Para correr las pruebas unitarias con Jest en modo de ejecucion unica, utilice:
+
+```bash
+npm test
+```
