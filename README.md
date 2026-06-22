@@ -1,14 +1,27 @@
 # Financial Product App
 
-Esta aplicacion es una solucion basada en Angular para gestionar productos financieros (como tarjetas de credito, cuentas de ahorro, etc.) de manera dinamica. Permite buscar, paginar, ordenar, registrar, editar y eliminar productos financieros. Tambien cuenta con un sistema de traduccion dinamico en tiempo real para Español e Ingles.
+Esta aplicación es una solución basada en Angular para gestionar productos financieros (como tarjetas de crédito, cuentas de ahorro, etc.) de manera dinámica. Permite buscar, paginar, ordenar, registrar, editar y eliminar productos financieros. También cuenta con un sistema de traducción dinámico en tiempo real para Español e Inglés.
+
+## Maquetación de la Interfaz
+
+A continuación se muestra la maquetación base utilizada para diseñar y distribuir los elementos de la interfaz de la aplicación:
+
+![Maquetacion de la Interfaz](src/assets/layout_wireframe.png)
 
 ## Arquitectura del Proyecto
 
 El proyecto sigue una estructura limpia y escalable organizada por modulos:
 
-- **Core (core/)**: Contiene los servicios globales de la aplicacion que deben tener una sola instancia en el ciclo de vida, como el servicio de traduccion (`TranslationService`) y los modelos de datos compartidos.
+- **Core (core/)**: Contiene los servicios globales de la aplicacion que deben tener una sola instancia en el ciclo de vida (como `TranslationService`), modelos de datos compartidos (`product.model.ts`), guards de proteccion de rutas (`ProductExistsGuard` y `UnsavedChangesGuard`), y diccionarios de traduccion externos en `i18n/` (`en.ts` y `es.ts`).
 - **Shared (shared/)**: Contiene componentes de interfaz reutilizables e independientes del contexto de negocio (`app-button`, `app-input`, `app-dropdown`, `app-modal`, `app-skeleton`), directivas, y la tuberia personalizada `TranslatePipe`.
 - **Features (features/)**: Agrupa los modulos de negocio de la aplicacion. En este caso, el modulo `products` gestiona las vistas de listado (`list`) y formulario de registro/edicion (`form`), sus servicios especificos (`ProductService`), y componentes locales (`ContextMenuComponent`).
+
+## Guards de Ruta
+
+La aplicacion cuenta con dos guards principales para proteger el flujo de navegacion:
+
+- **ProductExistsGuard**: Protege la ruta de edicion (`/products/edit/:id`). Consulta al backend para verificar si el ID del producto es valido y existe. Si no es valido, bloquea la entrada y redirige al listado.
+- **UnsavedChangesGuard**: Protege las rutas del formulario (`/products/add` y `/products/edit/:id`). Si el usuario ha editado campos del formulario y navega fuera sin guardar, muestra un dialogo de confirmacion para evitar la perdida accidental de cambios.
 
 ## Tecnologias y Versiones
 
