@@ -48,7 +48,15 @@ Siga estos pasos para instalar y ejecutar el proyecto localmente:
 
 Asegurese de tener instalado Node.js (se recomiendan versiones 16 o 18 LTS) y npm en su sistema.
 
-### 1. Instalar las dependencias
+### 1. Configurar las variables de entorno
+
+Cree un archivo `.env` en la raíz del proyecto basándose en el archivo `.env-example` y configure sus variables:
+
+```bash
+cp .env-example .env
+```
+
+### 2. Instalar las dependencias
 
 Ejecute el siguiente comando en la raiz del proyecto para descargar e instalar todas las dependencias necesarias:
 
@@ -56,7 +64,7 @@ Ejecute el siguiente comando en la raiz del proyecto para descargar e instalar t
 npm install
 ```
 
-### 2. Levantar el servidor de desarrollo
+### 3. Levantar el servidor de desarrollo
 
 Inicie el servidor local ejecutando:
 
@@ -67,7 +75,7 @@ npm start
 Este comando compila la aplicacion y levanta un servidor de desarrollo. Ademas, carga de forma automatica la configuracion de proxy definida.
 Abra su navegador en la direccion `http://localhost:4200/` para ver la aplicacion.
 
-### 3. Ejecutar las pruebas unitarias
+### 4. Ejecutar las pruebas unitarias
 
 Para correr las pruebas unitarias con Jest en modo de ejecucion unica, utilice:
 
