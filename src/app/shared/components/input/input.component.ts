@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, OnChanges {
   @ViewChild('inputEl', { static: false }) inputEl!: ElementRef<HTMLInputElement>;
   @Input() label = '';
   @Input() placeholder = '';
@@ -24,11 +24,17 @@ export class InputComponent implements ControlValueAccessor {
   @Input() errorMessage = '';
   @Input() isInvalid = false;
   @Input() readonly = false;
-
-  value: any = '';
+  @Input() value = '';
+  @Output() input = new EventEmitter<Event>();
 
   onChange: any = () => {};
   onTouch: any = () => {};
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value'] && changes['value'].currentValue !== undefined) {
+      this.value = changes['value'].currentValue;
+    }
+  }
 
   writeValue(value: any): void {
     this.value = value;
@@ -50,6 +56,7 @@ export class InputComponent implements ControlValueAccessor {
     const val = (event.target as HTMLInputElement).value;
     this.value = val;
     this.onChange(val);
+    this.input.emit(event);
   }
 
   onBlur(): void {

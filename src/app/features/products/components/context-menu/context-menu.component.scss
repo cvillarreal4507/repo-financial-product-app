@@ -1,4 +1,8 @@
-.dots-btn {
+:host {
+  display: inline-block;
+}
+
+:host ::ng-deep .dots-btn .btn {
   background: none;
   border: none;
   color: var(--text-secondary);
@@ -9,10 +13,13 @@
   align-items: center;
   justify-content: center;
   transition: background-color var(--transition-fast), color var(--transition-fast);
+  width: auto;
+  min-width: auto;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: rgba(15, 38, 92, 0.05);
     color: var(--primary-color);
+    box-shadow: none;
   }
 }
 
@@ -22,7 +29,7 @@
   padding: 4px 0;
 }
 
-.menu-item {
+:host ::ng-deep .menu-item .btn {
   background: none;
   border: none;
   width: 100%;
@@ -36,24 +43,27 @@
   align-items: center;
   gap: 8px;
   transition: background-color var(--transition-fast);
+  justify-content: flex-start;
+  border-radius: 0;
 
   svg {
     opacity: 0.6;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: #f1f5f9;
-    
+    box-shadow: none;
+
     svg {
       opacity: 1;
     }
   }
+}
 
-  &.danger {
-    color: var(--danger);
+:host ::ng-deep .menu-item.danger .btn {
+  color: var(--danger);
 
-    &:hover {
-      background-color: #fef2f2;
-    }
+  &:hover:not(:disabled) {
+    background-color: #fef2f2;
   }
 }

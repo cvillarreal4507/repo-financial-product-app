@@ -2,7 +2,7 @@
   <div class="modal-card animate-scale-in" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <h3 class="modal-title">{{ title }}</h3>
-      <button class="close-btn" (click)="onCancel()">&times;</button>
+      <app-button class="close-btn" [variant]="'outline'" type="button" (btnClick)="onCancel()">&times;</app-button>
     </div>
 
     <div class="modal-body">

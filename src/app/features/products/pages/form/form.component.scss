@@ -7,7 +7,7 @@
   margin-bottom: 24px;
 }
 
-.back-btn {
+:host ::ng-deep .back-btn .btn {
   background: none;
   border: none;
   color: var(--text-secondary);
@@ -20,10 +20,14 @@
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   transition: background-color var(--transition-fast), color var(--transition-fast);
+  width: auto;
+  min-width: auto;
+  justify-content: flex-start;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: rgba(15, 38, 92, 0.05);
     color: var(--primary-color);
+    box-shadow: none;
   }
 }
 

@@ -4,7 +4,10 @@
       <h1 class="app-title">{{ 'PAGE_TITLE_PRODUCTS' | translate }}</h1>
       <div class="lang-selector">
         <app-dropdown align="right" placement="bottom">
-          <button trigger class="lang-btn">
+          <app-button
+            trigger
+            [variant]="'outline'"
+          >
             <svg class="lang-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
               fill="currentColor">
               <path
@@ -15,15 +18,25 @@
               fill="currentColor">
               <path d="M7 10l5 5 5-5z" />
             </svg>
-          </button>
+          </app-button>
 
           <div menu class="lang-menu premium-card">
-            <button class="lang-item" [class.active]="activeLang === 'es'" (click)="setLanguage('es')">
+            <app-button
+              class="lang-item-button"
+              [class.active]="activeLang === 'es'"
+              [variant]="'outline'"
+              (btnClick)="setLanguage('es')"
+            >
               {{ 'SPANISH' | translate }}
-            </button>
-            <button class="lang-item" [class.active]="activeLang === 'en'" (click)="setLanguage('en')">
+            </app-button>
+            <app-button
+              class="lang-item-button"
+              [class.active]="activeLang === 'en'"
+              [variant]="'outline'"
+              (btnClick)="setLanguage('en')"
+            >
               {{ 'ENGLISH' | translate }}
-            </button>
+            </app-button>
           </div>
         </app-dropdown>
       </div>
